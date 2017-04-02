@@ -1,0 +1,639 @@
+<!--
+//=============================================================================
+//
+//		Tên tệp: 	QuanLyCanBo.html
+//		Mục Đích:	Xây dựng giao diện demo
+//		Người tạo:	Trung.DV 2016.02.01	[DSE-QLGV01] Xây dựng khung cơ bản
+//
+//=============================================================================
+-->
+<!DOCTYPE html>
+
+<html>
+<!--Head Start-->
+
+<head>
+    <!--Các thẻ meta Start-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Các thẻ meta End-->
+    <!--css Start-->
+    <!--css dạng thư viện Start-->
+    <link href="../Contents/01_css/02_bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Contents/01_css/02_bootstrap/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../Contents/01_css/03_another/Jcrop.min.css" rel="stylesheet" />
+    <!--css dạng thư viện End-->
+    <!--css dạng tự định nghĩa Start-->
+    <link href="../Contents/01_css/01_myCss/shared.css" rel="stylesheet" />
+    <link href="../Contents/01_css/01_myCss/responsive.css" rel="stylesheet" />
+    <link href="../Contents/01_css/01_myCss/map[New].css" rel="stylesheet" />
+    <link href="../Contents/01_css/01_myCss/map.responsive.css" rel="stylesheet" />
+    <!--css dạng tự định nghĩa End-->
+    <!--css End-->
+    <!--script Start-->
+    <!--script dạng thư viện Start-->
+    <!--NOTE: LUÔN LUÔN JQUERY.JS PHẢI INCLUDE TRƯỚC BOOTSTRAP.JS KỂ CẢ JQUERY-UI -->
+    <script src="../Contents/02_script/04_jquery/jquery-2.2.3.min.js"></script>
+    <script src="../Contents/02_script/03_bootStrapScript/bootstrap.min.js"></script>
+    <script src="../Contents/02_script/03_bootStrapScript/bootstrap-datepicker.min.js"></script>
+    <script src="../Contents/02_script/05_another/Jcrop.min.js"></script>
+    <!--script dạng thư viện End-->
+    <!--script dạng tự định nghĩa Start-->
+    <script src="../Contents/02_script/01_myScript/shared.js"></script>
+    <script src="../Contents/02_script/01_myScript/responsive.js"></script>
+    <script src="../Contents/02_script/01_myScript/datepicker.js"></script>
+    <script src="../Contents/02_script/01_myScript/fileUpload.js"></script>
+    <script src="../Contents/02_script/01_myScript/swipeHandle.js"></script>
+    <script src="../Contents/02_script/01_myScript/tempData.js"></script>
+    <script src="../Contents/02_script/02_googleMapScript/mapObjects.js"></script>
+    <script src="../Contents/02_script/02_googleMapScript/mapShared[New].js"></script>
+    <!--script dạng tự định nghĩa End-->
+    <!--script End-->
+
+    <title>Quản lý đoàn thực tập</title>
+</head>
+<!--Head End-->
+
+<!--Body Start-->
+<body>
+    <!--Top Nav Start-->
+    <div class="row nav-top" id="top">
+        <!--Div chứa ảnh banner Start-->
+        <div class="col-lg-6 col-md-5 col-sm-3 col-xs-3 banner" id="banner-wrapper"></div>
+        <!--Div chứa ảnh banner End-->
+        <!--Div chứa menu Start-->
+        <div class="col-lg-6 col-md-7 col-sm-9 col-xs-9 no-padding" id="menu-wrapper">
+            <button class="btn btn-default btn-main-menu pull-right">
+				<span class="glyphicon glyphicon-menu-hamburger no-margin"></span>
+			</button>
+            <div class="clearfix"></div>
+            <div class="menu-background"></div>
+            <!--Background khi mở menu ở điện thoại-->
+            <!--Khung menu Start-->
+            <div class="btn-menu-frame menu-hidden" id="main-menu">
+                <div id="close-menu">
+                    <div id="close-menu-btn">
+                        <span class="fa fa-angle-right no-margin"></span><span class="fa fa-angle-right"></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="btn-menu" id="btn-info" data-toggle="modal" data-target="#info-modal">
+                    <span>Thông tin <div class="menu-icon menu-info-icon"></div></span>
+                </div>
+                <div class="btn-menu" id="btn-qa">
+                    <span>Trợ giúp <div class="menu-icon menu-help-icon"></div></span>
+                </div>
+                <!--Customer avatar Start-->
+                <div class="btn-customer-info-frame" id="btn-customer-info">
+                    <div class="dropdown">
+                        <img class="img-avatar" data-bind="c_user_avatar" alt="DSE_FITA" id="customer-extension-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />
+
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="customer-extension-menu">
+                            <li><a href="#">Thay đổi thông tin</a></li>
+                            <li><a href="#">Thay đổi mật khẩu</a></li>
+                            <li><a href="#">Lịch sử hoạt động</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--Customer avatar End-->
+            </div>
+            <!--Khung menu End-->
+        </div>
+        <!--Div chứa menu End-->
+    </div>
+    <!--Top Nav End-->
+    <!--Process bar Start-->
+    <div class="process-bar yellow">
+    </div>
+    <!--Process bar End-->
+
+    <!--Button go to top Start-->
+    <div class="btn-top">
+        <a href="#top">
+            <span class="glyphicon glyphicon-eject"></span>
+        </a>
+    </div>
+    <!--Button go to top End-->
+
+    <!--Main body Start-->
+    <div class="row no-padding main-body">
+        <div class="static-background show-mobile"></div>
+        <!--Toolbox Start-->
+        <div class="map-toolbox">
+            <input type="text" id="search-box" class="form-control" placeholder="Nhập địa điểm cần tìm kiếm...">
+            <button class="btn btn-default" id="search">
+                <span></span>
+            </button>
+            <button class="btn btn-default" id="plus">
+                <span></span>
+            </button>
+            <button class="btn btn-default" id="minus">
+                <span></span>
+            </button>
+            <button class="btn btn-default" id="filter">
+                <span></span>
+            </button>
+            <button class="btn btn-default" id="explain">
+                <span></span>
+            </button>
+            <div id="filter-box">
+                <div class="container-fluid">
+                    <div class="overflow-x">
+                        <div>
+                            <div class="row">
+                                <p>Tên đoàn</p>
+                                <input type="text" class="form-control" placeholder="Tên đoàn cần tìm kiếm">
+                            </div> 
+                            <div class="row">
+                                <p>Khoa</p>
+                                 <div class="dropdown dropdown-select">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <span id="dropdown-select-display-value" itemid="0">-- Lựa chọn một giá trị --</span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="user-dropdown">
+                                        <li><a href="#" itemid="1">Công nghệ thông tin</a></li>
+                                        <li><a href="#" itemid="2">Quản lý đất đai</a></li>
+                                        <li><a href="#" itemid="3">Kinh tế</a></li>
+                                    </ul>
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <p>Bộ môn</p>
+                                 <div class="dropdown dropdown-select">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <span id="dropdown-select-display-value" itemid="0">-- Lựa chọn một giá trị --</span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="user-dropdown">
+                                        <li><a href="#" itemid="1">Công nghệ phần mềm</a></li>
+                                        <li><a href="#" itemid="2">Khoa học máy tính</a></li>
+                                        <li><a href="#" itemid="3">Toán, tin ứng dụng</a></li>
+                                    </ul>
+                                </div>
+                            </div> 
+                            <div id="more-fields">
+                                <div class="row">
+                                    <p>Tỉnh/thành phố</p>
+                                    <div class="dropdown dropdown-select">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <span id="dropdown-select-display-value" itemid="0">-- Lựa chọn một giá trị --</span>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="user-dropdown">
+                                            <li><a href="#" itemid="1">Hà Nội</a></li>
+                                            <li><a href="#" itemid="2">Hồ Chí Minh</a></li>
+                                            <li><a href="#" itemid="3">Hòa Bình</a></li>
+                                        </ul>
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <p>Quận/Huyện</p>
+                                    <div class="dropdown dropdown-select">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <span id="dropdown-select-display-value" itemid="0">-- Lựa chọn một giá trị --</span>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="user-dropdown">
+                                            <li><a href="#" itemid="1">Long Biên</a></li>
+                                            <li><a href="#" itemid="2">Cầu Giấy</a></li>
+                                            <li><a href="#" itemid="3">Gia Lâm</a></li>
+                                        </ul>
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <p>Thời gian thực tập</p>
+                                     <div class="input-group input-daterange">
+                                        <input type="text" class="form-control" />
+                                        <span class="input-group-addon">tới</span>
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div> 
+                            
+                            <div class="row">
+                                <div class="pull-left">
+                                    <button class="btn btn-default">
+                                        Lọc danh sách
+                                    </button>
+                                    <a data-toggle="myCollapse" data-target="#more-fields">Tìm kiếm nâng cao</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="results">
+                            <div class="label-note-frame">
+                                <p class="label label-warning label-note">
+                                    <label class="hidden-mobile">Nhấn vào một 1 nhóm trong danh sách để đi đến vị trí trên bản đồ hoặc di chuyển con trỏ chuột để xem thông tin</label>
+                                    <label class="show-mobile">Nhấn vào mũi tên để ẩn/hiện phần lọc</label>
+
+                                    <span data-toggle="myCollapse" data-target="#filter-box .container-fluid .overflow-x>div:first-child">
+                                        <span class="glyphicon glyphicon-chevron-down glyphicon-chevron-up"></span>
+                                    </span>
+                                </p>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="explain-box">
+                <div> 
+                    <div class="row no-margin">
+                        <div class="col-xs-3 mylocation"></div>
+                        <div class="col-xs-9"><span>Vị trí của bạn<span></div>
+                    </div> <div class="row no-margin">
+                        <div class="col-xs-3 selector"></div>
+                        <div class="col-xs-9"><span>Vị trí đang chọn<span></div>
+                    </div>
+                    <hr>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 cntt"></div>
+                        <div class="col-xs-9"><span>Công nghệ thông tin<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 kt"></div>
+                        <div class="col-xs-9"><span>Kinh tế<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 cn"></div>
+                        <div class="col-xs-9"><span>Chăn nuôi<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 cntp"></div>
+                        <div class="col-xs-9"><span>Công nghệ thực phẩm<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 cd"></div>
+                        <div class="col-xs-9"><span>Cơ điện<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 cnsh"></div>
+                        <div class="col-xs-9"><span>Công nghệ sinh học<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 ktqt"></div>
+                        <div class="col-xs-9"><span>Kinh tế quốc tế<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 llct"></div>
+                        <div class="col-xs-9"><span>Lý luận chính trị<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 mt"></div>
+                        <div class="col-xs-9"><span>Môi trường<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 nh"></div>
+                        <div class="col-xs-9"><span>Nông học<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 qldd"></div>
+                        <div class="col-xs-9"><span>Quản lý đất đai<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 sp"></div>
+                        <div class="col-xs-9"><span>Sư phạm<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 ty"></div>
+                        <div class="col-xs-9"><span>Thú y<span></div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-xs-3 ts"></div>
+                        <div class="col-xs-9"><span>Thủy sản<span></div>
+                    </div>
+                </div>
+            </div>
+        </div><!--Toolbox End-->
+
+        <div class="map map-lg" id="map">
+        </div>
+    </div>
+    <!--Main body End-->
+   
+    <!--Dialog chi tiết Start-->
+    <div id="detail-modal" class="modal fade" role="dialog">
+        <!--Modal Dialog Start-->
+        <div class="modal-dialog modal-lg">
+            <!--Modal content Start-->
+            <div class="modal-content">
+                <!--Modal Header Start-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thông tin đoàn <span data-bind="name"></span></h4>
+                    <input type="hidden" data-bind="id">
+                </div>
+                <!--Modal Header End-->
+                <!--Modal body Start-->
+                <div class="modal-body">
+                    <div class="row">
+                        <!--Left col-->
+                        <div class="col-sm-6">
+                            <h4>Thông tin chi tiết</h4>                            
+                            <table class="table table-nobordered no-margin">
+                                <tbody>
+                                    <tr>
+                                        <td class="hidden-mobile">Tên</td>
+                                        <td>
+                                            <p class="show-mobile">Tên:</p>
+                                            <span data-bind="name"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="hidden-mobile">Khoa</td>
+                                        <td>
+                                            <p class="show-mobile">Khoa:</p>
+                                            <span data-bind="faculty"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="hidden-mobile">Bộ môn</td>
+                                        <td>
+                                            <p class="show-mobile">Bộ môn:</p>
+                                            <span data-bind="department"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="hidden-mobile">Giảng viên</td>
+                                        <td>
+                                            <p class="show-mobile">Giảng viên:</p>
+                                            <span data-bind="boss"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="hidden-mobile">Thời gian</td>
+                                        <td>
+                                            <p class="show-mobile">Thời gian:</p>
+                                            <span data-bind="dtFrom"></span> - <span data-bind="dtTo"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="hidden-mobile">Địa điểm thực tập</td>
+                                        <td>
+                                            <p class="show-mobile">Địa điểm thực tập:</p>
+                                            <a href="#" data-bind="address"></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="hidden-mobile">Báo cáo</td>
+                                        <td>
+                                            <p class="show-mobile">Báo cáo:</p>
+                                            <a href="#" data-toggle="modal" data-target="#stream-modal"><label class="label label-success"><i class="glyphicon glyphicon-play"></i> Yêu cầu báo cáo</label></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                             <a href="#" data-type="display-media"><strong>Dữ liệu ảnh và video</strong></a> - <a href="#" data-type="display-history"><strong>Lịch sử di chuyển</strong></a>    
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--Right col-->
+                        <div class="col-sm-6">
+                            <h4>Danh sách sinh viên</h4>
+                            <table class="table table-bordered table-striped table-hover no-margin" data-bind="student">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Mã sinh viên</th>
+                                        <th>Họ và tên</th>
+                                        <th>Lớp</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row no-display">
+                        <div class="col-sm-6">
+                            <table class="table table-hover table-striped table-bordered" data-bind="history">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Ngày giờ</th>
+                                        <!--<th>Địa điểm</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <span><a href="#" data-type="display-media"><strong>Dữ liệu ảnh và video</strong></a> - <a href="#" data-type="display-history"><strong>Quay lại</strong></a></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="map map-sm" id="map-sm"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--Modal body End-->
+            </div>
+            <!--Modal content End-->
+        </div>
+        <!--Modal Dialog End-->
+    </div>
+    <!--Dialog chi tiết End-->
+     <!--Dialog hình ảnh Start-->
+    <div id="album-modal" class="modal fade" role="dialog">
+        <!--Modal Dialog Start-->
+        <div class="modal-dialog modal-lg">
+            <!--Modal content Start-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Danh sách ảnh và video</h4>
+                </div>
+                <!--Modal body Start-->
+                <div class="modal-body no-padding">
+                    <div class="row no-margin" data-type="display-album">
+                    </div>
+                </div>
+                <!--Modal body End-->
+            </div>
+            <!--Modal content End-->
+        </div>
+        <!--Modal Dialog End-->
+    </div>
+    <!--Dialog hình ảnh End-->
+    <!--Dialog hình ảnh Start-->
+    <div id="media-modal" class="modal fade" role="dialog">
+        <!--Modal Dialog Start-->
+        <div class="modal-dialog modal-lg">
+            <!--Modal content Start-->
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!--Modal body Start-->
+                <div class="modal-body no-padding">
+                    <div class="row no-margin">
+                        <!--Div for display media-->
+                        <div class="col-sm-8 no-padding"></div>
+                        <!--Div for display chat area-->
+                        <div class="col-sm-4">
+                            <div class="row no-margin">
+                                <div class="col-xs-12 no-padding">
+                                    <div class="avatar">
+                                        <img data-bind="c_user_avatar" alt="DSE_FITA">
+                                    </div>
+                                    <div class="user-info">
+                                        <p data-bind="c_user_fullName"></p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 no-padding">
+                                    <div class="input-group" data-type="input-mess">
+                                        <input type="text" class="form-control" placeholder="Để lại bình luận...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">Gửi</button>
+                                        </span>
+                                    </div><!-- /input-group -->
+                                </div>
+                            </div>
+                            <div class="row no-margin" data-type="display-mess"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!--Modal body End-->
+            </div>
+            <!--Modal content End-->
+        </div>
+        <!--Modal Dialog End-->
+    </div>
+    <!--Dialog hình ảnh End-->
+    <!--Dialog upload file Start-->
+    <div id="file-modal" class="modal fade" role="dialog">
+        <!--Modal Dialog Start-->
+         <div class="modal-dialog">
+            <!--Modal content Start-->
+            <div class="modal-content">
+                <!--Modal Header Start-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Trình tải tệp lên</h4>
+                </div>
+                <!--Modal Header End-->
+                <!--Modal body Start-->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="file" name="file-input" class="form-control no-display" multiple>
+                            <div>
+                                <button class="btn btn-success" data-type="choose-files">
+                                    <i class="glyphicon glyphicon-saved"></i> Lựa chọn tệp tải lên
+                                </button>
+                            </div>
+                            <p class="center" data-type="note"><strong>Lưu ý:</strong> Nhấn giữ Ctrl để chọn nhiều tệp một lần</p>
+                            <p class="center" data-type="note">Chỉ chấp nhận tệp ở dạng <span data-bind="file-extension"></span> và có kích thước nhỏ hơn <span data-bind="file-maxSize"></span></p>
+
+                            <br data-show="hasFile"/>
+                            <p class="center" data-show="hasFile" data-type="note">Để tải lên tệp vui lòng nhấn nút <label class="label label-success" data-type="display-button">Tải lên</label></p>
+                            <p class="center" data-show="hasFile" data-type="note">Bạn có thể cắt ảnh bằng cách chọn ở danh sách tệp sau đó chỉnh sửa ở cửa sổ bên <span class="show-mobile">dưới</span><span class="hidden-mobile">phải</span></p>
+                            <div data-type="display-files"></div>
+                            <div data-show="hasFile">
+                                <button class="btn btn-success" data-type="submit-files">
+                                    <i class="glyphicon glyphicon-open"></i> Tải lên (<span data-bind="num-file"></span>)
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div>
+                                <img src="../Contents/03_images/01_myImages/map-sm.png"/>
+                                <div data-type="toolbox">
+                                    <button class="btn btn-default" data-type="clear-crop-info" title="Hủy việc cắt ảnh">
+                                        <i class="glyphicon glyphicon-remove"></i>Hủy
+                                    </button>
+                                    <button class="btn btn-default" data-type="save-crop-info" title="Lưu thông tin ảnh sau khi cắt">
+                                        <i class="glyphicon glyphicon-ok"></i>Lưu
+                                    </button>
+                                </div>
+                                <img data-type="display-selected-image"/>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--Modal body End-->
+            </div><!--Modal content End-->
+         </div><!--Modal Dialog End-->
+    </div><!--Dialog upload file End-->
+    <!--Dialog báo cáo Start-->
+    <div id="stream-modal" class="modal fade" role="dialog">
+        <!--Modal Dialog Start-->
+         <div class="modal-dialog modal-lg">
+            <!--Modal content Start-->
+            <div class="modal-content">
+                <!--Modal body Start-->
+                <div class="modal-body">
+                    <p>Đang kết nối...</p>
+                </div><!--Modal body End-->
+            </div><!--Modal content End-->
+         </div><!--Modal Dialog End-->
+    </div><!--Dialog báo cáo End-->
+    <!--Dialog thong tin Start-->
+    <div id="info-modal" class="modal fade" role="dialog">
+        <!--Modal Dialog Start-->
+        <div class="modal-dialog">
+            <!--Modal content Start-->
+            <div class="modal-content">
+                <!--Modal Header Start-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thông tin phần mềm</h4>
+                </div>
+                <!--Modal Header End-->
+                <!--Modal body Start-->
+                <div class="modal-body">
+                    <p class="center">
+                        Bản quyền thuộc <strong>Nhóm nghiên cứu và phát triển phần mềm</strong><br>Bộ môn Công nghệ phần mềm - Khoa Công nghệ thông tin<br>Học viện Nông nghiệp Việt Nam
+                    </p>
+                </div>
+                <!--Modal body End-->
+            </div>
+            <!--Modal content End-->
+        </div>
+        <!--Modal Dialog End-->
+    </div>
+    <!--Dialog thong tin End-->
+    <!--Dialog thông điệp Start-->
+    <div id="message-box-modal" class="modal fade" role="dialog">
+        <!--Modal Dialog Start-->
+        <div class="modal-dialog">
+            <!--Modal content Start-->
+            <div class="modal-content">
+                <!--Modal Header Start-->
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                </div>
+                <!--Modal Header End-->
+                <!--Modal body Start-->
+                <div class="modal-body">
+                    <p id="message-box-content"></p>
+                </div>
+                <!--Modal body End-->
+                <!--Modal footer Start-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" role="yes/no" itemid="1" data-dismiss="modal">
+					<span>Đồng ý</span>
+				</button>
+                    <button type="button" class="btn btn-default" role="yes/no" itemid="0" data-dismiss="modal">
+					<span>Hủy bỏ</span>
+				</button>
+                    <button type="button" class="btn btn-default" role="ok" data-dismiss="modal">
+					<span>Xác nhận</span>
+				</button>
+                    <div class="clearfix"></div>
+                </div>
+                <!--Modal footer End-->
+            </div>
+            <!--Modal content End-->
+        </div>
+        <!--Modal Dialog End-->
+    </div>
+    <!--Dialog thông điệp End-->
+
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALUPg17GSlsVdgPzh9dT0HbvKiEtoxCxw&libraries=places&callback=initMap&language=vi" async defer></script>
+</body>
+<!--Body End-->
+
+</html>
