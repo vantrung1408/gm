@@ -3,7 +3,7 @@ var vnua_color_yellow = 'rgb(237, 181, 58)';
 var vnua_color_brown = 'rgb(102, 51, 0)';
 var process_bar_interval = null;
 var process_bar_timer = getProcessBarInterval();
-var current_user_data = {'id':1,'avatar':'../Contents/03_images/01_myImages/avatar.png','fullName':'Ngô Công Thắng'}
+var current_user_data = {'id':1,'avatar':'..https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/avatar.png','fullName':'Ngô Công Thắng'}
 
 $(document).ajaxStart(function () { process_bar_process(process_bar_timer); }).ajaxStop(function () { process_bar_process('stop'); });
 

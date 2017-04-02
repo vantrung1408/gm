@@ -54,7 +54,7 @@ input[type="checkbox"] {
 
 .banner {
     height: 100%;
-    background-image: url("/Contents/03_images/01_myImages/banner.png");
+    background-image: url("https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/banner.png");
     background-size: auto 100%;
     background-repeat: no-repeat;
 }
@@ -706,7 +706,7 @@ span.caret {
 .album-frame .list-picture-frame div {
     height: 65px;
     width: 65px;
-    background: url("/Contents/03_images/01_myImages/Marker_media/1.png") no-repeat center;
+    background: url("https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/Marker_media/1.png") no-repeat center;
     display: inline-block;
 }
 
@@ -1240,11 +1240,11 @@ div.menu-icon {
 }
 
 .btn-menu:hover .menu-icon {
-    background-image: url('/Contents/03_images/01_myImages/IconPack_hover.png');
+    background-image: url('https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/IconPack_hover.png');
 }
 
 .menu-icon {
-    background-image: url('/Contents/03_images/01_myImages/IconPack.png');
+    background-image: url('https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/IconPack.png');
     background-size: 1600%;
     background-repeat: no-repeat;
 }
@@ -1314,7 +1314,7 @@ div.menu-icon {
     background-repeat: no-repeat;
     background-position: center top;
     background-size: 100%;
-    background-image: url('/Contents/03_images/01_myImages/bigLogo.png');
+    background-image: url('https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/bigLogo.png');
 }
 
 *[role="collapse"] {
@@ -1758,7 +1758,7 @@ div[data-bind="displayAllFiles"]>div>div:hover>.director{
 #media-modal .modal-body>.row .infoWindow-wrapper>div.director,
 div[data-bind="displayAllFiles"]>div>div>.director{
     position: absolute;
-    background-image: url('/Contents/03_images/01_myImages/IconPack.png');
+    background-image: url('https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/IconPack.png');
     background-repeat: no-repeat;
     opacity: 0;
     height: 32px;

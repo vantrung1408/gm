@@ -175,7 +175,7 @@
 		background-attachment: fixed;
 		background-position: left top;
 		background-size: 100%;
-		/*background-image: url('/Contents/03_images/01_myImages/login_bg_xs.png');*/
+		/*background-image: url('https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/login_bg_xs.png');*/
 	}
 
 	.mobile-auto-width{
@@ -298,13 +298,13 @@
 
 @media (max-width: 1153px){
 	.banner{
-		background-image: url("/Contents/03_images/01_myImages/banner_md.png");
+		background-image: url("https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/banner_md.png");
 	}
 }
 
 @media (max-width: 1053px){
 	.banner{
-		background-image: url("/Contents/03_images/01_myImages/banner_sm.png");
+		background-image: url("https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/banner_sm.png");
 	}
 }
 
@@ -314,7 +314,7 @@
 
 @media (max-width: 960px){
 	.banner{
-		background-image: url("/Contents/03_images/01_myImages/banner_xs.png");
+		background-image: url("https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/banner_xs.png");
 		min-width: 79px !important;
 	}
 }
