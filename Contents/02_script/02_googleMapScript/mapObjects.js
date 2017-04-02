@@ -636,7 +636,7 @@ function icon(type, googleMapObj = null)
     }
 
     this.getUrl = function(){
-        return '..https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/Marker_icon/vnua_map_icon_' + this.type + '.png';
+        return 'https://vantrung1408.github.io/gm/Contents/03_images/01_myImages/Marker_icon/vnua_map_icon_' + this.type + '.png';
     }
 }
 
